@@ -1,0 +1,168 @@
+<div>
+    <h1>Social Amelioration Card(SAC)</h1>
+    <div><h4>(Kopya ng benepisyaryo)</h4></div>
+    <div>
+        <h2>Puno ng Pamilya (Kasalukuyan)</h2>
+        <form [formGroup]="combinedForm" (ngSubmit)="onSubmit()">
+
+            <div class="form style-01">
+                <!--* Name -->
+                <label for="name">Pangalan:</label>
+                <input type="text" class="input-long" id="name" formControlName="name">
+
+                <!--* Gender -->
+
+                <div class="flex">
+                        <label for="gender" >Kasarian:</label>
+                        <select id="gender" class="select-small" formControlName="gender">
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+
+                    <!--* Id Number -->
+                    <label for="typeId">Uri ng ID:</label>
+                    <input type="text" class="" id="typeId" formControlName="typeId">
+
+                    <!--* Id Number -->
+                    <label for="validId">Numero ng ID:</label>
+                    <input type="number" class="input-small" id="validId" formControlName="validId">
+                </div>
+            </div>
+
+            <div class="flex">
+                <label for="birthday">Petsa ng Kapanakan:</label>
+                <input type="date" id="birthday" formControlName="birthday">
+                <div>
+                    <!--* Phone Number -->
+                    <label for="phoneNum">Cellphone No.</label>
+                    <input type="number" id="phoneNum" formControlName="phoneNum" maxlength="12">
+                </div>
+                <div>
+                    <!--* Month Salary -->
+                    <label for="monthSalary">Buwanang Kita: </label>
+                    <input type="number" id="monthSalary" formControlName="monthSalary">
+                </div>
+            </div>
+
+            <div class="grid">
+                <div class="address">
+                    <label for="address">Tirahan:</label>
+                    <input type="text" id="address" formControlName="address_Tirahan"/>
+                </div> 
+                <div class="streetInput">
+                    <label for="streetInput">Kalye:</label>
+                    <input type="text" id="streetInput" formControlName="address_Street">
+                </div> 
+                <div class="brgyInput">
+                    <label for="brgyInput">Brgy:</label>
+                    <input type="text" id="brgyInput" formControlName="address_Brgy">
+                </div> 
+                <div class="cityInput">
+                    <label for="cityInput">Lungsod/Bayan:</label>
+                    <input type="text" id="cityInput" formControlName="address_City">
+                </div> 
+                <div class="provInput">
+                    <label for="provInput">Probinsya:</label>
+                    <input type="text" id="provInput" formControlName="address_Province">
+                </div> 
+                <div class="regionInput">
+                    <label for="regionInput">Rehiyon:</label>
+                    <input type="text" id="regionInput" formControlName="address_Region">
+                </div>
+            </div>
+            <div class="flex">
+                <label class="radio-contain">
+                    <input type="checkbox" checked="checked" id="bnfUCT" formControlName="bnfUCT"/>
+                    <span class="checkmark"></span>
+                    <label for="bnfUCT">Benipisyaryo ng UCT</label>
+                </label>
+                
+                <label class="radio-contain">  
+                    <input type="checkbox" checked="checked" id="bnf4ps" formControlName="bnf4ps"/>
+                    <span class="checkmark"></span>
+                    <label for="bnf4ps">Benipisyaryo ng 4Ps</label>
+                </label>
+                
+                <label class="radio-contain">
+                    <input type="checkbox" checked="checked" id="bnfGroup"formControlName="bnfGroup"/>
+                    <span class="checkmark"></span>
+                    <label for="bnfGroup">Katutubo(Group)</label>
+                </label>
+
+                <label class="radio-contain">
+                    <input type="checkbox" checked="checked" formControlName="bnfOther"/>
+                    <span class="checkmark"></span>
+                    <label for="bnfOther">Others:</label>
+                    <input type="text" id="bnf" formControlName="bnfOtherInfo">
+                </label>
+            </div>
+
+            <div class="errors">
+                <span *ngIf="onValidation('phoneNum')" class="valid-display">
+                    <span *ngIf="phoneNum?.errors?.['invalidLength']">Cellphone No. must be 12 digits</span>
+                </span>
+            </div>
+
+            <h2>Family Members</h2>
+            <div>
+                <div formArrayName="familyMembers">
+                    <div *ngFor="let member of familyMembers.controls; let i = index">
+                        <div [formGroupName]="i" class="divider">
+                            <h4>Family No. {{ i+1 }}</h4>
+                            <div>
+                                <label for="famName">Miyembro ng Pamilya:</label>
+                                <input type="text" class="input-medium" formControlName="famName">
+
+                                <label for="famRelation">Relasyon sa Puno ng Pamilya:</label>
+                                <input type="text" class="input-small" formControlName="famRelation">
+                            </div>
+                            <div>
+                                <label for="famGender">Kasarian:</label>
+                                <select id="gender" formControlName="famGender">
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                </select>
+
+                                <label for="famBirth">Petsa ng Kapanakan:</label>
+                                <input type="date" id="famBirth" formControlName="famBirth">
+
+                                <label for="famWork">Trabaho:</label>
+                                <input type="text" class="input-medium" formControlName="famWork">
+                            </div>
+                            <div>
+                                <label for="famSector">Sektor:</label>
+                                <select id="famSector" class="select-medium" formControlName="famSector">
+                                    <option value="nakakatanda">A. Nakakatanda</option>
+                                    <option value="buntis">B. Buntis</option>
+                                    <option value="nagpapasusong ina">C. Nagpapasusong Ina</option>
+                                    <option value="pwd">D. PWD</option>
+                                    <option value="solo parent">E. Solo Parent</option>
+                                    <option value="walang tirahan">F. Walang Tirahan</option>
+                                </select>
+
+                                <label for="famHealth">Kondisyon ng Kalusugan(1-5):</label>
+                                <select id="famHealth" class="select-medium" formControlName="famHealth">
+                                    <option value="sakit sa Puso">1. Sakit sa Puso</option>
+                                    <option value="altapresyon">2. Altapresyon</option>
+                                    <option value="sakit sa baga">3. Sakit sa baga</option>
+                                    <option value="diyabetis">4. Diyabetis</option>
+                                    <option value="kanser">5. Kanser</option>
+                                </select>
+
+                                <button type="button" class="btn btn-danger" (click)="removeInput(i)">Remove</button>
+                            </div>
+                        </div>
+                        
+                  </div>
+                </div>
+                <button type="button" class="btn btn-primary" (click)="addFamilyMember()">Add Family Member</button>
+            </div>
+
+            <!-- Validators -->
+            <input type="submit" value="Submit" [disabled]="isInputsValid">
+
+
+          </form>
+        
+    </div>
+</div>
